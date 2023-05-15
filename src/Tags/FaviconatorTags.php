@@ -34,6 +34,7 @@ class FaviconatorTags extends Tags
 		foreach ($images as &$image) {
 
 			if ($image['extension'] !== 'png') {
+				$image = null;
 				continue;
 			}
 
@@ -44,6 +45,8 @@ class FaviconatorTags extends Tags
 
 			$image['relation'] = (str_contains($image['filename'], 'apple-touch-icon')) ? 'apple-touch-icon' : 'icon';
 		}
+
+		$images = array_filter($images);
 
 		$config = FaviconatorConfig::create(Site::current()->handle);
 
